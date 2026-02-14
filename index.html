@@ -1,0 +1,2822 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>✨ غماس بلدي ✨ | قائمة طعام الأصالة</title>
+    <link rel="apple-touch-icon" href="https://iili.io/fyEXKps.jpg">
+    <link rel="icon" href="https://iili.io/fyEXKps.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-red: #a00000;
+            --secondary-red: #d00000;
+            --luminous-white: #fff;
+            --text-dark: #333;
+            --text-light: #f0f0f0;
+            --card-bg-light: rgba(255, 255, 255, 0.98);
+            --shadow-soft: rgba(0, 0, 0, 0.25);
+            --shadow-intense: rgba(0, 0, 0, 0.7);
+            --gradient-main: linear-gradient(135deg, var(--secondary-red) 0, var(--primary-red) 100%);
+            --gradient-reverse: linear-gradient(135deg, var(--primary-red) 0, var(--secondary-red) 100%);
+            --bg-glow-start: rgba(208, 0, 0, 0.9);
+            --bg-glow-end: rgba(160, 0, 0, 0.9);
+            --header-bg-overlay: rgba(160, 0, 0, 0.3);
+            --header-border-bottom: #d00000;
+            --header-shadow: rgba(0, 0, 0, 0.5);
+            --tab-bg: #f0f0f0;
+            --tab-border: #d00000;
+            --tab-text: #555;
+            --tab-active-bg: linear-gradient(to right, #D00000, #A00000);
+            --tab-active-text: #fff;
+            --tab-active-shadow: 0 5px 15px rgba(160, 0, 0, 0.6);
+            --category-section-bg: rgba(255, 255, 255, 0.05);
+            --embroidery-glow-strong: 0 0 40px rgba(255, 0, 0, 0.9), 0 0 80px rgba(255, 50, 50, 0.6);
+            --embroidery-text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            --card-hover-shadow-enhanced: 0 20px 50px var(--shadow-intense), 0 0 45px var(--secondary-red);
+            --new-tag-shadow-enhanced: 0 0 15px var(--secondary-red), 0 0 25px rgba(255, 0, 0, 0.7);
+            --card-border-glow: 0 0 0 3px var(--secondary-red), 0 0 15px var(--secondary-red), inset 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: transparent;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            direction: rtl;
+            text-align: right;
+            font-size: 15px;
+            position: relative;
+            touch-action: manipulation;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        #animated-full-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-red);
+            z-index: -1;
+            overflow: hidden;
+            filter: brightness(1.1) saturate(1.1);
+            animation: backgroundShift 30s ease-in-out infinite alternate;
+            background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 10px),
+                            repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 0, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 10px);
+            background-size: 20px 20px;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        #animated-full-background::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0, transparent 50%);
+            opacity: .4;
+            animation: backgroundGlow 15s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes backgroundGlow {
+            0% { transform: scale(1); opacity: .4; }
+            50% { transform: scale(1.1); opacity: .5; }
+            100% { transform: scale(1); opacity: .4; }
+        }
+
+        .food-particle {
+            position: absolute;
+            font-size: 0;
+            opacity: 0;
+            pointer-events: none;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+            animation: moveParticle linear infinite;
+        }
+
+        @keyframes moveParticle {
+            0% { transform: translate(var(--x-start, 0vw), var(--y-start, 0vh)) scale(0.3) rotate(0deg); opacity: 0; }
+            10% { opacity: .9; }
+            90% { opacity: .9; }
+            100% { transform: translate(var(--x-end, 100vw), var(--y-end, 100vh)) scale(1.3) rotate(var(--rotate-end, 360deg)); opacity: 0; }
+        }
+
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--secondary-red), var(--primary-red));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1.5s ease-out;
+            overflow: hidden;
+        }
+
+        #intro-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .intro-logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: var(--luminous-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            box-shadow: 0 0 40px var(--secondary-red), 0 0 80px rgba(255, 50, 50, 0.9), inset 0 0 20px rgba(255, 255, 255, 0.3);
+            border: 5px solid var(--luminous-white);
+            transform: scale(0);
+            opacity: 0;
+            animation: logoPopIn 1s ease-out forwards;
+            animation-delay: .2s;
+            position: relative;
+            z-index: 10;
+        }
+
+        .intro-logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--secondary-red) 0%, transparent 70%);
+            z-index: -1;
+            opacity: 0.7;
+            animation: glowPulse 2s infinite alternate;
+        }
+
+        @keyframes glowPulse {
+            0% { opacity: 0.5; transform: scale(0.95); }
+            100% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        .intro-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            animation: logoSingleSpin 1.5s ease-in-out forwards;
+        }
+
+        @keyframes logoPopIn {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes logoSingleSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .intro-text {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 2em;
+            color: var(--luminous-white);
+            text-shadow: 0 0 25px var(--primary-red), 0 0 50px var(--secondary-red);
+            opacity: 0;
+            transform: translateY(50px);
+            animation: textFadeIn 1.5s ease-out forwards;
+            animation-delay: .8s;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes textFadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .loading-text {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1em;
+            color: var(--luminous-white);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 2s;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .loading-text span {
+            animation: blink 1s infinite steps(1, start);
+            opacity: 0;
+        }
+
+        .loading-text span:nth-child(1) { animation-delay: 2.5s; }
+        .loading-text span:nth-child(2) { animation-delay: 2.6s; }
+        .loading-text span:nth-child(3) { animation-delay: 2.7s; }
+
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        .loading-bar-container {
+            width: 85%;
+            max-width: 400px;
+            height: 7px;
+            background-color: var(--luminous-white);
+            border-radius: 5px;
+            margin-top: 30px;
+            overflow: hidden;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 2.2s;
+        }
+
+        .loading-bar {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(to right, #FF0000, #A00000);
+            border-radius: 50px;
+            animation: fillBar 3.5s ease-out forwards;
+            animation-delay: .5s;
+            box-shadow: 0 0 10px #f00;
+        }
+
+        @keyframes fillBar {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        .intro-burst-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .intro-burst-particle {
+            position: absolute;
+            font-size: 0;
+            opacity: 0;
+            animation: burstOut 1.5s ease-out forwards;
+            filter: drop-shadow(0 0 10px var(--luminous-white));
+        }
+
+        @keyframes burstOut {
+            0% { transform: scale(0) translate(0, 0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: scale(1.8) translate(var(--x-offset), var(--y-offset)); opacity: 0; }
+        }
+
+        #main-content {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+            max-width: 100%;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            display: none;
+            pointer-events: none;
+            width: 100%;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+            display: block !important;
+            pointer-events: auto !important;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .header {
+            text-align: center;
+            padding-top: 15px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 10px 30px var(--header-shadow);
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            border-bottom: 5px solid var(--header-border-bottom);
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: auto;
+            overflow: hidden;
+            position: relative;
+            will-change: transform;
+        }
+
+        .header-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.4) saturate(1.8) hue-rotate(340deg);
+            transition: filter .5s ease-in-out;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--header-bg-overlay);
+            z-index: -1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 15px;
+        }
+
+        .header-logo-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            background-color: var(--luminous-white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            box-shadow: 0 0 25px var(--primary-red), 0 0 50px var(--secondary-red);
+            border: 4px solid var(--secondary-red);
+        }
+
+        .header-logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .main-title {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.8em;
+            margin-bottom: 0;
+            color: var(--luminous-white);
+            text-shadow: 0 0 15px rgba(0, 0, 0, 1), 0 0 30px var(--primary-red);
+            animation: titlePulse 2s infinite alternate;
+        }
+
+        @keyframes titlePulse {
+            from { transform: scale(1); text-shadow: 0 0 15px rgba(0, 0, 0, 1), 0 0 30px var(--primary-red); }
+            to { transform: scale(1.03); text-shadow: 0 0 20px rgba(0, 0, 0, 1), 0 0 40px var(--secondary-red); }
+        }
+
+        .main-title .highlight {
+            color: var(--text-dark);
+            background: var(--luminous-white);
+            padding: 5px 18px;
+            border-radius: 18px;
+            box-shadow: 0 0 20px var(--primary-red);
+            display: inline-block;
+            transform: rotate(-2deg);
+            text-shadow: none;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+            padding: 12px 8px;
+            background: linear-gradient(to bottom, #ffffff, #f8f8f8);
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 25px 25px;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.1);
+            gap: 8px;
+        }
+
+        .nav-tab-button {
+            background: white;
+            border: 2px solid transparent;
+            cursor: pointer;
+            padding: 12px 16px;
+            margin: 0 2px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95em;
+            color: var(--tab-text);
+            font-weight: 800;
+            border-radius: 50px;
+            transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            min-width: 120px;
+            flex: 1 1 auto;
+            text-shadow: var(--embroidery-text-shadow);
+            touch-action: manipulation;
+        }
+
+        .nav-tab-button:active {
+            transform: scale(0.98);
+        }
+
+        .nav-tab-button:hover {
+            color: var(--secondary-red);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-color: rgba(208, 0, 0, 0.3);
+        }
+
+        .nav-tab-button.active {
+            background: var(--tab-active-bg);
+            color: var(--tab-active-text);
+            box-shadow: var(--tab-active-shadow), 0 8px 25px rgba(160, 0, 0, 0.4);
+            transform: translateY(-4px);
+            border: 2px solid var(--luminous-white);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .nav-tab-button.active .tab-icon {
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+        }
+
+        .tab-icon {
+            font-size: 1.2em;
+            color: inherit;
+            transition: transform .3s ease;
+        }
+
+        #header-spacer {
+            display: none !important;
+            height: 0 !important;
+        }
+
+        .menu-container {
+            padding: 20px 15px 100px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .menu-section {
+            display: none;
+            width: 100%;
+            max-width: 100%;
+            margin-top: 25px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 12px 30px var(--shadow-intense);
+            overflow: hidden;
+            border: 3px solid var(--primary-red);
+            padding: 20px;
+            animation: fadeInContent .5s ease-out forwards;
+            position: relative;
+        }
+
+        .menu-section::before,
+        .menu-section::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--secondary-red);
+            border-radius: 5px;
+            opacity: .7;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .menu-section::before {
+            top: -2px;
+            right: -2px;
+            border-top-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-left: none;
+            border-bottom: 0;
+        }
+
+        .menu-section::after {
+            bottom: -2px;
+            left: -2px;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 0;
+            border-right: 0;
+            border-top: 0;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.6em;
+            color: var(--primary-red);
+            text-align: center;
+            margin-bottom: 25px;
+            text-shadow: 0 0 12px rgba(255, 0, 0, 0.3);
+            position: relative;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed rgba(160, 0, 0, 0.3);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--gradient-main);
+            border-radius: 4px;
+            box-shadow: 0 0 10px var(--primary-red);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: center;
+            padding: 0;
+            box-shadow: 0 10px 25px var(--shadow-soft);
+            border: 3px solid transparent;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            min-height: 480px;
+            box-shadow: var(--card-border-glow);
+            touch-action: manipulation;
+        }
+
+        .product-card:active {
+            transform: scale(0.99);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px var(--shadow-intense), 0 0 30px var(--secondary-red), inset 0 0 15px rgba(0, 0, 0, 0.1);
+            border-color: var(--secondary-red);
+        }
+
+        .product-image-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 3px solid var(--primary-red);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .product-card h3 {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.4em;
+            color: var(--primary-red);
+            margin-bottom: 12px;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+            line-height: 1.3;
+        }
+
+        .product-card .new-tag {
+            background: var(--secondary-red);
+            color: var(--luminous-white);
+            font-size: 0.75em;
+            padding: 4px 10px;
+            border-radius: 6px;
+            vertical-align: middle;
+            margin-right: 6px;
+            box-shadow: var(--new-tag-shadow-enhanced);
+            animation: newTagBounce 1s infinite alternate, pulseGlow 1.5s infinite alternate;
+            transform-origin: center bottom;
+        }
+
+        @keyframes newTagBounce {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: var(--new-tag-shadow-enhanced); }
+            100% { box-shadow: 0 0 20px var(--secondary-red), 0 0 35px rgba(255, 0, 0, 0.7); }
+        }
+
+        .product-card p {
+            font-size: 0.95em;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .product-card .price {
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.8em;
+            font-weight: 900;
+            color: var(--secondary-red);
+            display: block;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            color: var(--luminous-white);
+            border: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+
+        .quantity-btn:hover {
+            background: var(--gradient-reverse);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .quantity-display {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary-red);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .add-to-cart-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradient-main);
+            color: var(--luminous-white);
+            padding: 16px 25px;
+            border-radius: 35px;
+            font-weight: bold;
+            font-size: 1em;
+            box-shadow: 0 8px 20px var(--shadow-intense);
+            transition: all 0.3s ease-out;
+            border: 0;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
+            touch-action: manipulation;
+        }
+
+        .add-to-cart-button:active {
+            transform: scale(0.98);
+        }
+
+        .add-to-cart-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 40%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            transition: left .4s ease-out;
+            transform: skewX(-25deg);
+        }
+
+        .add-to-cart-button:hover::before {
+            left: 100%;
+        }
+
+        .add-to-cart-button i {
+            margin-right: 10px;
+            transition: transform .3s ease;
+        }
+
+        .add-to-cart-button:hover {
+            background: var(--gradient-reverse);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px var(--shadow-intense), 0 0 20px var(--primary-red);
+        }
+
+        .add-to-cart-button:hover i {
+            transform: translateX(5px);
+        }
+
+        .cart-fab {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--luminous-white);
+            font-size: 1.5em;
+            box-shadow: 0 8px 25px var(--shadow-intense), 0 0 20px var(--secondary-red);
+            cursor: pointer;
+            z-index: 999;
+            transition: all 0.3s ease;
+            border: 3px solid var(--luminous-white);
+        }
+
+        .cart-fab:active {
+            transform: scale(0.95);
+        }
+
+        .cart-fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px var(--shadow-intense), 0 0 30px var(--secondary-red);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--luminous-white);
+            color: var(--primary-red);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: bold;
+            border: 2px solid var(--secondary-red);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .cart-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+            display: flex;
+        }
+
+        .cart-content {
+            background-color: var(--card-bg-light);
+            margin: auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px var(--shadow-intense), 0 0 30px var(--secondary-red);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform .3s ease-out, opacity .3s ease-out;
+            border: 3px solid var(--primary-red);
+        }
+
+        .cart-modal.active .cart-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .cart-content h2 {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--primary-red);
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid var(--primary-red);
+            padding-bottom: 10px;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background: rgba(240, 240, 240, 0.5);
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            color: var(--primary-red);
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--secondary-red);
+            font-weight: bold;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-quantity-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            color: var(--luminous-white);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-total {
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .cart-total {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-red);
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(160, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 2px dashed var(--primary-red);
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient-main);
+            color: var(--luminous-white);
+            border: none;
+            border-radius: 35px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .checkout-button:hover {
+            background: var(--gradient-reverse);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-intense);
+        }
+
+        .empty-cart {
+            text-align: center;
+            color: var(--text-dark);
+            padding: 20px;
+            font-size: 1.1em;
+        }
+
+        .invoice-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            pointer-events: none;
+        }
+
+        .invoice-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+            display: flex;
+        }
+
+        .invoice-content {
+            background-color: var(--card-bg-light);
+            margin: auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px var(--shadow-intense), 0 0 30px var(--secondary-red);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform .3s ease-out, opacity .3s ease-out;
+            border: 3px solid var(--primary-red);
+        }
+
+        .invoice-modal.active .invoice-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .invoice-content h2 {
+            font-family: 'Tajawal', sans-serif;
+            color: var(--primary-red);
+            margin-bottom: 25px;
+            font-size: 1.6em;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid var(--primary-red);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: 'Cairo', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        .phone-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .country-code {
+            flex: 0 0 70px;
+            background: #f0f0f0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .phone-input {
+            flex: 1;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .submit-order-button {
+            flex: 1;
+            padding: 15px;
+            background: var(--gradient-main);
+            color: var(--luminous-white);
+            border: none;
+            border-radius: 35px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-order-button:hover {
+            background: var(--gradient-reverse);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow-intense);
+        }
+
+        .cancel-button {
+            flex: 1;
+            padding: 15px;
+            background: #666;
+            color: var(--luminous-white);
+            border: none;
+            border-radius: 35px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-button:hover {
+            background: #555;
+            transform: translateY(-3px);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: var(--text-dark);
+            font-size: 2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color .3s ease-in-out, transform .2s ease-in-out;
+            background: transparent;
+            border: 0;
+            padding: 5px;
+            border-radius: 50%;
+            line-height: 1;
+        }
+
+        .close-button:hover {
+            color: var(--primary-red);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .error-message {
+            color: var(--primary-red);
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            background: var(--primary-red);
+            color: var(--text-light);
+            font-size: .95em;
+            margin-top: 50px;
+            box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            border-top: 4px solid var(--secondary-red);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer .instagram-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--secondary-red);
+            color: var(--luminous-white);
+            font-size: 2em;
+            text-decoration: none;
+            box-shadow: 0 0 12px var(--primary-red), 0 0 25px var(--secondary-red);
+            transition: all .3s ease-in-out;
+            border: 3px solid var(--luminous-white);
+            touch-action: manipulation;
+        }
+
+        .footer .instagram-button:active {
+            transform: scale(0.95);
+        }
+
+        .footer .instagram-button:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 18px var(--primary-red), 0 0 35px var(--secondary-red);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .nav-tab-button:hover,
+            .add-to-cart-button:hover,
+            .footer .instagram-button:hover,
+            .cart-fab:hover,
+            .checkout-button:hover,
+            .submit-order-button:hover,
+            .cancel-button:hover,
+            .product-card:hover {
+                transform: none !important;
+            }
+            
+            .add-to-cart-button:hover::before {
+                left: -100%;
+            }
+            
+            .product-card:hover img {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-tab-button {
+                padding: 10px 12px;
+                font-size: 0.85em;
+                min-width: 110px;
+            }
+            
+            .tab-icon {
+                font-size: 1em;
+            }
+            
+            .main-title {
+                font-size: 1.5em;
+            }
+            
+            .header-logo-circle {
+                width: 70px;
+                height: 70px;
+                border: 3px solid var(--secondary-red);
+            }
+            
+            .product-card {
+                min-height: 450px;
+            }
+            
+            .product-image-container {
+                height: 200px;
+            }
+            
+            .product-card h3 {
+                font-size: 1.3em;
+            }
+            
+            .product-card .price {
+                font-size: 1.6em;
+            }
+        }
+
+        @media (min-width: 568px) and (max-width: 767px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
+
+        body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+        
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 25px;
+            border-radius: 35px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 9999;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border: 2px solid white;
+            color: white;
+            direction: rtl;
+        }
+        
+        .connection-status.online {
+            background: linear-gradient(135deg, #28a745, #218838);
+        }
+        
+        .connection-status.offline {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+        }
+    </style>
+</head>
+<body>
+    <div id="intro-screen">
+        <div class="intro-burst-container"></div>
+        <div class="intro-logo">
+            <img src="https://iili.io/fyEXKps.jpg" alt="شعار غماس بلدي">
+        </div>
+        <div class="intro-text">أهلاً بك في غماس بلدي!</div>
+        <div class="loading-text">على طريق السلط<span>.</span><span>.</span><span>.</span></div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+    
+    <div id="animated-full-background"></div>
+    
+    <div id="main-content" class="hidden">
+        <header class="header" id="main-header">
+            <video autoplay loop muted playsinline class="header-video" poster="https://via.placeholder.com/1920x1080/A00000/FFFFFF?text=Video+Loading">
+                <source src="https://cdn.pixabay.com/video/2025/07/27/293765_medium.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay"></div>
+            <div class="header-content">
+                <div class="header-logo-circle">
+                    <img src="https://iili.io/fyEXKps.jpg" alt="شعار غماس بلدي">
+                </div>
+                <h1 class="main-title"><span class="highlight">غماس بلدي</span></h1>
+            </div>
+            <div class="nav-tabs" id="navTabs">
+                <button class="nav-tab-button active" data-target="sandwiches-section">
+                    <span class="tab-icon">🥪</span>
+                    <span>الساندويشات</span>
+                </button>
+                <button class="nav-tab-button" data-target="ghmas-plates-section">
+                    <span class="tab-icon">🍽️</span>
+                    <span>أطباق غماس</span>
+                </button>
+                <button class="nav-tab-button" data-target="trays-section">
+                    <span class="tab-icon">🍲</span>
+                    <span>الصواني</span>
+                </button>
+                <button class="nav-tab-button" data-target="appetizers-section">
+                    <span class="tab-icon">🥗</span>
+                    <span>المقبلات</span>
+                </button>
+            </div>
+        </header>
+        
+        <div id="header-spacer"></div>
+        
+        <main class="menu-container">
+            
+            <!-- الساندويشات -->
+            <div class="menu-section active" id="sandwiches-section">
+                <h2 class="section-title">قسم الساندويشات</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/4_.jpg" alt="ساندويش كباب دبل">
+                        </div>
+                        <div class="card-content">
+                            <h3>ساندويش كباب دبل</h3>
+                            <p>ساندويش كباب بقطعتين من الكباب، لمحبي الكباب الأصيل.</p>
+                            <span class="price">3.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="ساندويش كباب دبل" data-price="3.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/6_.jpg" alt="ساندويش روسيّة">
+                        </div>
+                        <div class="card-content">
+                            <h3>ساندويش روسيّة</h3>
+                            <p>ساندويش روسيّة مميز: 2 كباب + 1 ليّة، تجربة طعم لا تُنسى.</p>
+                            <span class="price">4.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="ساندويش روسيّة" data-price="4.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_.jpg" alt="ساندويش السلطية">
+                        </div>
+                        <div class="card-content">
+                            <h3>ساندويش السلطية</h3>
+                            <p>ساندويش السلطية الأصيل: 2 معلاق + 1 ليّة، وجبة متكاملة.</p>
+                            <span class="price">5.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="ساندويش السلطية" data-price="5.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/gemini-generated-image-7038wf-7038wf-7038_202602/Gemini_Generated_Image_7038wf7038wf7038.png" alt="كباب دجاج بالجبنة">
+                        </div>
+                        <div class="card-content">
+                            <h3>كباب دجاج بالجبنة</h3>
+                            <p>ساندويش كباب دجاج مع جبنة ذائبة، مزيج لذيذ ومميز.</p>
+                            <span class="price">2.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كباب دجاج بالجبنة" data-price="2.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_.jpg" alt="كباب بالباذنجان">
+                        </div>
+                        <div class="card-content">
+                            <h3>كباب بالباذنجان</h3>
+                            <p>كباب لحم مع باذنجان مشوي، نكهة شرقية أصيلة.</p>
+                            <span class="price">2.90 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كباب بالباذنجان" data-price="2.90">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/2_.jpg" alt="كباب لحم">
+                        </div>
+                        <div class="card-content">
+                            <h3>كباب لحم</h3>
+                            <p>ساندويش كباب لحم تقليدي، طعم أصيل وطازج.</p>
+                            <span class="price">2.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كباب لحم" data-price="2.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/6_.jpg" alt="روسية">
+                        </div>
+                        <div class="card-content">
+                            <h3>روسية <span class="new-tag">جديد!</span></h3>
+                            <p>سيخين كباب وسيخ لية، وجبة متكاملة من المشاوي.</p>
+                            <span class="price">5.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="روسية" data-price="5.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/4_.jpg" alt="لف غماس لحم">
+                        </div>
+                        <div class="card-content">
+                            <h3>لف غماس لحم</h3>
+                            <p>لفة غماس مع لحم مشوي وخضار طازجة.</p>
+                            <span class="price">3.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="لف غماس لحم" data-price="3.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/5_.jpg" alt="لف غماس دجاج">
+                        </div>
+                        <div class="card-content">
+                            <h3>لف غماس دجاج</h3>
+                            <p>لفة غماس مع دجاج مشوي وخضار طازجة.</p>
+                            <span class="price">3.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="لف غماس دجاج" data-price="3.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/5_.jpg" alt="شيش طاووق">
+                        </div>
+                        <div class="card-content">
+                            <h3>شيش طاووق</h3>
+                            <p>ساندويش شيش طاووق مشوي، قطع دجاج متبلة بإتقان.</p>
+                            <span class="price">2.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="شيش طاووق" data-price="2.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/7_.jpg" alt="معلاق">
+                        </div>
+                        <div class="card-content">
+                            <h3>معلاق</h3>
+                            <p>ساندويش معلاق تقليدي، طعم أصيل من المشاوي.</p>
+                            <span class="price">2.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="معلاق" data-price="2.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_.jpg" alt="لية">
+                        </div>
+                        <div class="card-content">
+                            <h3>لية</h3>
+                            <p>ساندويش لية مشوية، نكهة غنية ومميزة.</p>
+                            <span class="price">2.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="لية" data-price="2.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- أطباق غماس بلدي -->
+            <div class="menu-section" id="ghmas-plates-section">
+                <h2 class="section-title">أطباق غماس بلدي</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_1.jpg" alt="كيلو كباب">
+                        </div>
+                        <div class="card-content">
+                            <h3>كيلو كباب <span class="new-tag">جديد!</span></h3>
+                            <p>كيلو كامل من كباب الغماس الشهي، محضّر بعناية فائقة.</p>
+                            <span class="price">21.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كيلو كباب" data-price="21.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_2.jpg" alt="نصف كيلو كباب">
+                        </div>
+                        <div class="card-content">
+                            <h3>نصف كيلو كباب</h3>
+                            <p>نصف كيلو من كباب الغماس الطازج، مذاق لا يُنسى.</p>
+                            <span class="price">11.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="نصف كيلو كباب" data-price="11.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_4.jpg" alt="كيلو شيش طاووق">
+                        </div>
+                        <div class="card-content">
+                            <h3>كيلو شيش طاووق</h3>
+                            <p>كيلو من شيش طاووق مشوي، قطع دجاج متبلة بإتقان.</p>
+                            <span class="price">18.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كيلو شيش طاووق" data-price="18.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_3.jpg" alt="نصف كيلو شيش طاووق">
+                        </div>
+                        <div class="card-content">
+                            <h3>نصف كيلو شيش طاووق</h3>
+                            <p>نصف كيلو من شيش طاووق مشوي، مثالي لوجبة عائلية.</p>
+                            <span class="price">9.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="نصف كيلو شيش طاووق" data-price="9.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_5.jpg" alt="كيلو مشكل">
+                        </div>
+                        <div class="card-content">
+                            <h3>كيلو مشكل</h3>
+                            <p>تشكيلة فاخرة من المشاوي الغماس، تكفي لمشاركة الأحباء.</p>
+                            <span class="price">24.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كيلو مشكل" data-price="24.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_6.jpg" alt="نصف كيلو مشكل">
+                        </div>
+                        <div class="card-content">
+                            <h3>نصف كيلو مشكل</h3>
+                            <p>نصف كيلو من تشكيلة المشاوي الغماس، خيار مثالي لوجبة متكاملة.</p>
+                            <span class="price">13.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="نصف كيلو مشكل" data-price="13.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_7.jpg" alt="حمص باللحمة">
+                        </div>
+                        <div class="card-content">
+                            <h3>حمص باللحمة</h3>
+                            <p>حمص بلدي مع لحمة مفرومة، طبق تقليدي لذيذ.</p>
+                            <span class="price">4.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="حمص باللحمة" data-price="4.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_8.jpg" alt="قلاية بندورة باللحمة">
+                        </div>
+                        <div class="card-content">
+                            <h3>قلاية بندورة باللحمة</h3>
+                            <p>قلاية بندورة مع لحمة مفرومة، نكهة بيتية أصيلة.</p>
+                            <span class="price">4.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="قلاية بندورة باللحمة" data-price="4.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_9.jpg" alt="صاجية معلاق">
+                        </div>
+                        <div class="card-content">
+                            <h3>صاجية معلاق</h3>
+                            <p>صاجية معلاق مشوي مع خضار، وجبة دسمة ولذيذة.</p>
+                            <span class="price">5.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صاجية معلاق" data-price="5.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_10.jpg" alt="صاجية لحمة">
+                        </div>
+                        <div class="card-content">
+                            <h3>صاجية لحمة</h3>
+                            <p>صاجية لحمة مشوية مع خضار، وجبة متكاملة.</p>
+                            <span class="price">5.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صاجية لحمة" data-price="5.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/1_11.jpg" alt="صاجية دجاج">
+                        </div>
+                        <div class="card-content">
+                            <h3>صاجية دجاج</h3>
+                            <p>صاجية دجاج مشوي مع خضار، وجبة خفيفة ولذيذة.</p>
+                            <span class="price">4.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صاجية دجاج" data-price="4.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الصواني -->
+            <div class="menu-section" id="trays-section">
+                <h2 class="section-title">الصواني</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/2_1.jpg" alt="كفته بطحينية">
+                        </div>
+                        <div class="card-content">
+                            <h3>كفته بطحينية <span class="new-tag">جديد!</span></h3>
+                            <p>كفته لحم مع صلصة الطحينة، طبق تقليدي لذيذ.</p>
+                            <span class="price">6.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كفته بطحينية" data-price="6.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/2_2.jpg" alt="فوارغ">
+                        </div>
+                        <div class="card-content">
+                            <h3>فوارغ</h3>
+                            <p>فوارغ محشوة بالأرز واللحم، طبق شرقي مميز.</p>
+                            <span class="price">7.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="فوارغ" data-price="7.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/2_3.jpg" alt="صينية زهرة باللحمة المفرومة والطحينة">
+                        </div>
+                        <div class="card-content">
+                            <h3>صينية زهرة باللحمة المفرومة والطحينة</h3>
+                            <p>زهرة مع لحمة مفرومة وطحينة، طبق دسم ولذيذ.</p>
+                            <span class="price">6.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صينية زهرة باللحمة المفرومة والطحينة" data-price="6.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/2_4.jpg" alt="كفته ببندورة">
+                        </div>
+                        <div class="card-content">
+                            <h3>كفته ببندورة</h3>
+                            <p>كفته لحم مع صلصة البندورة، طبق تقليدي لذيذ.</p>
+                            <span class="price">6.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="كفته ببندورة" data-price="6.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- المقبلات -->
+            <div class="menu-section" id="appetizers-section">
+                <h2 class="section-title">المقبلات</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_1.jpg" alt="برغل">
+                        </div>
+                        <div class="card-content">
+                            <h3>برغل <span class="new-tag">جديد!</span></h3>
+                            <p>برغل بلدي مطبوخ، مقبلات تقليدية.</p>
+                            <span class="price">1.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="برغل" data-price="1.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_13.jpg" alt="بقدونسية">
+                        </div>
+                        <div class="card-content">
+                            <h3>بقدونسية</h3>
+                            <p>سلطة بقدونس طازجة مع بندورة وبصل، مقبلات منعشة.</p>
+                            <span class="price">1.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="بقدونسية" data-price="1.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_2.jpg" alt="صحن حمص">
+                        </div>
+                        <div class="card-content">
+                            <h3>صحن حمص</h3>
+                            <p>حمص بلدي طازج، مقبلات تقليدية لذيذة.</p>
+                            <span class="price">1.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صحن حمص" data-price="1.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_3.jpg" alt="سلطة طحينية">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة طحينية</h3>
+                            <p>سلطة طحينية كريمية، مقبلات لذيذة.</p>
+                            <span class="price">2.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة طحينية" data-price="2.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_4.jpg" alt="متبل">
+                        </div>
+                        <div class="card-content">
+                            <h3>متبل</h3>
+                            <p>باذنجان مشوي مع ثوم وزيت زيتون، مقبلات شرقية.</p>
+                            <span class="price">1.25 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="متبل" data-price="1.25">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_5.jpg" alt="صحن خيار بلبن">
+                        </div>
+                        <div class="card-content">
+                            <h3>صحن خيار بلبن</h3>
+                            <p>خيار طازج مع لبن، مقبلات منعشة.</p>
+                            <span class="price">1.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صحن خيار بلبن" data-price="1.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_6.jpg" alt="سلطة حارة">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة حارة</h3>
+                            <p>سلطة خضار حارة، مقبلات بنكهة قوية.</p>
+                            <span class="price">1.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة حارة" data-price="1.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_7.jpg" alt="سلطة جرجير">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة جرجير</h3>
+                            <p>سلطة جرجير طازجة، مقبلات صحية.</p>
+                            <span class="price">1.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة جرجير" data-price="1.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_8.jpg" alt="سلطة عربية">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة عربية</h3>
+                            <p>سلطة خضار عربية، مقبلات تقليدية.</p>
+                            <span class="price">1.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة عربية" data-price="1.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_8.jpg" alt="سلطة غماس">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة غماس</h3>
+                            <p>سلطة غماس خاصة، مقبلات مميزة.</p>
+                            <span class="price">2.00 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة غماس" data-price="2.00">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_9.jpg" alt="سلطة فلاحية">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة فلاحية</h3>
+                            <p>سلطة فلاحية تقليدية، مقبلات بيتية.</p>
+                            <span class="price">1.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة فلاحية" data-price="1.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_10.jpg" alt="بطاطا مقلية">
+                        </div>
+                        <div class="card-content">
+                            <h3>بطاطا مقلية</h3>
+                            <p>بطاطا مقلية طازجة، مقبلات شعبية.</p>
+                            <span class="price">0.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="بطاطا مقلية" data-price="0.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_11.jpg" alt="سلطة فتوش">
+                        </div>
+                        <div class="card-content">
+                            <h3>سلطة فتوش</h3>
+                            <p>سلطة فتوش تقليدية، مقبلات منعشة.</p>
+                            <span class="price">1.75 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="سلطة فتوش" data-price="1.75">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="https://archive.org/download/1-11_20260210/3_12.jpg" alt="صحن رز أبيض">
+                        </div>
+                        <div class="card-content">
+                            <h3>صحن رز أبيض</h3>
+                            <p>رز أبيض مطبوخ، مقبلات أساسية.</p>
+                            <span class="price">1.50 د.أ</span>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus-btn">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus-btn">+</button>
+                            </div>
+                            <button class="add-to-cart-button" data-product="صحن رز أبيض" data-price="1.50">
+                                <i class="fas fa-cart-plus"></i> أضف إلى السلة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <div class="social-links">
+                <a href="https://www.instagram.com/laithdeveloper/" target="_blank" class="instagram-button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.instagram.com/abood_m_anaswh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="instagram-button">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p>© 2026 حقوق الطبع والنشر ل Laith AL-Arabiat</p>
+        </footer>
+    </div>
+    
+    <!-- سلة المشتريات -->
+    <div class="cart-fab" id="cartFab">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+    </div>
+    
+    <!-- نافذة السلة -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="close-button" id="closeCartButton">×</button>
+            <h2>سلة المشتريات</h2>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">السلة فارغة</div>
+            </div>
+            <div class="cart-total" id="cartTotal" style="display: none;">
+                المجموع: <span id="totalAmount">0</span> د.أ
+            </div>
+            <button class="checkout-button" id="checkoutButton" style="display: none;">تأكيد الطلب</button>
+        </div>
+    </div>
+    
+    <!-- نموذج الفاتورة -->
+    <div class="invoice-modal" id="invoiceModal">
+        <div class="invoice-content">
+            <button class="close-button" id="closeInvoiceButton">×</button>
+            <h2>تفاصيل الطلب</h2>
+            <form id="invoiceForm">
+                <div class="form-group">
+                    <label for="customerName">الاسم الكامل:</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                    <div class="error-message" id="nameError">الرجاء إدخال الاسم الكامل</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerPhone">رقم الهاتف:</label>
+                    <div class="phone-input-container">
+                        <div class="country-code">+962</div>
+                        <input type="tel" id="customerPhone" name="customerPhone" 
+                               pattern="[0-9]{10}" 
+                               maxlength="10" 
+                               placeholder="7XXXXXXXX"
+                               required>
+                    </div>
+                    <div class="error-message" id="phoneError">الرجاء إدخال رقم هاتف أردني صحيح (10 أرقام)</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="branch">الفرع:</label>
+                    <select id="branch" name="branch" required>
+                        <option value="">اختر الفرع</option>
+                        <option value="مجمع الداوود">فرع مجمع الداوود</option>
+                        <option value="شارع المدينة">فرع شارع المدينة</option>
+                    </select>
+                    <div class="error-message" id="branchError">الرجاء اختيار الفرع</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">ملاحظات (اختياري):</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="ملاحظات إضافية حول الطلب..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <h3 style="text-align: center; margin-top: 20px;">ملخص الطلب</h3>
+                    <div id="orderSummary" style="background: #f9f9f9; padding: 15px; border-radius: 10px; margin-top: 10px;"></div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cancel-button" id="cancelOrderButton">إلغاء</button>
+                    <button type="submit" class="submit-order-button">تأكيد الطلب</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // ==================== الحل الجذري النهائي - نظام تخزين موحد 100% ====================
+        (function() {
+            'use strict';
+            
+            // ==================== مفاتيح التخزين الموحدة ====================
+            const STORAGE_KEYS = {
+                MASTER: 'ghmas_orders_master',     // المخزن الرئيسي الموحد
+                KITCHEN: 'ghmas_kitchen_orders',    // مخزن المطبخ (نسخة)
+                CART: 'ghmas_cart',                 // مخزن السلة المؤقتة
+                SETTINGS: 'ghmas_settings'          // إعدادات المستخدم
+            };
+            
+            // ==================== رابط Google Apps Script ====================
+            const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbwnBAXUOo1-7cwX_F7rmsdsnYukn93FFZKKcNmo1Z1FvkBmf3FU5oWL3jA6IUYybAT6BQ/exec';
+            
+            // ==================== حالة النظام ====================
+            const SystemState = {
+                isOnline: navigator.onLine,
+                shoppingCart: [],
+                initialized: false
+            };
+            
+            // ==================== ===== نظام الطلبات الموحد ===== ====================
+            const OrderSystem = {
+                // ========== إنشاء رقم طلب فريد ==========
+                generateOrderId: function() {
+                    const date = new Date();
+                    const year = date.getFullYear().toString().slice(-2);
+                    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                    const day = date.getDate().toString().padStart(2, '0');
+                    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+                    return `ORD-${year}${month}${day}-${random}`;
+                },
+                
+                // ========== حفظ الطلب في جميع المخازن ==========
+                saveOrder: function(orderData) {
+                    try {
+                        // 1. التأكد من وجود orderId
+                        if (!orderData.orderId) {
+                            orderData.orderId = this.generateOrderId();
+                        }
+                        
+                        // 2. إضافة الطابع الزمني
+                        orderData.timestamp = orderData.timestamp || new Date().toISOString();
+                        orderData.status = orderData.status || 'pending';
+                        orderData.source = orderData.source || 'web';
+                        
+                        // 3. حفظ في المخزن الرئيسي (MASTER)
+                        const masterOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.MASTER) || '[]');
+                        masterOrders.push({...orderData});
+                        localStorage.setItem(STORAGE_KEYS.MASTER, JSON.stringify(masterOrders));
+                        
+                        // 4. حفظ في مخزن المطبخ (KITCHEN)
+                        const kitchenOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.KITCHEN) || '[]');
+                        kitchenOrders.push({
+                            orderId: orderData.orderId,
+                            timestamp: orderData.timestamp,
+                            customerName: orderData.customerName,
+                            customerPhone: orderData.customerPhone,
+                            branch: orderData.branch,
+                            notes: orderData.notes || '',
+                            status: 'pending',
+                            total: orderData.total,
+                            itemsCount: orderData.itemsCount,
+                            items: orderData.items,
+                            source: orderData.source,
+                            preparedAt: '',
+                            completedAt: ''
+                        });
+                        localStorage.setItem(STORAGE_KEYS.KITCHEN, JSON.stringify(kitchenOrders));
+                        
+                        console.log('✅ تم حفظ الطلب:', orderData.orderId);
+                        
+                        // 5. محاولة إرسال إلى Google Sheets (نسخة احتياطية)
+                        if (SystemState.isOnline) {
+                            this.sendToGoogleSheets(orderData);
+                        }
+                        
+                        return { success: true, orderId: orderData.orderId };
+                    } catch (error) {
+                        console.error('❌ خطأ في حفظ الطلب:', error);
+                        return { success: false, error: error.message };
+                    }
+                },
+                
+                // ========== إرسال إلى Google Sheets (خلفي - لا يؤثر على تجربة المستخدم) ==========
+                sendToGoogleSheets: function(orderData) {
+                    try {
+                        // استخدام Image Beacon - لا يسبب CORS
+                        const url = `${GAS_API_URL}?action=addOrder&data=${encodeURIComponent(JSON.stringify(orderData))}&_=${Date.now()}`;
+                        new Image().src = url;
+                        
+                        // محاولة fetch مع no-cors
+                        fetch(GAS_API_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                            body: new URLSearchParams({
+                                action: 'addOrder',
+                                data: JSON.stringify(orderData)
+                            })
+                        }).catch(e => {});
+                    } catch (e) {}
+                },
+                
+                // ========== جلب جميع الطلبات ==========
+                getAllOrders: function() {
+                    try {
+                        return JSON.parse(localStorage.getItem(STORAGE_KEYS.MASTER) || '[]');
+                    } catch (e) {
+                        return [];
+                    }
+                },
+                
+                // ========== تحديث حالة الطلب ==========
+                updateOrderStatus: function(orderId, newStatus) {
+                    try {
+                        // تحديث في المخزن الرئيسي
+                        const masterOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.MASTER) || '[]');
+                        const masterIndex = masterOrders.findIndex(o => o.orderId === orderId);
+                        if (masterIndex !== -1) {
+                            masterOrders[masterIndex].status = newStatus;
+                            if (newStatus === 'completed') {
+                                masterOrders[masterIndex].completedAt = new Date().toISOString();
+                            }
+                            if (newStatus === 'preparing') {
+                                masterOrders[masterIndex].preparedAt = new Date().toISOString();
+                            }
+                            localStorage.setItem(STORAGE_KEYS.MASTER, JSON.stringify(masterOrders));
+                        }
+                        
+                        // تحديث في مخزن المطبخ
+                        const kitchenOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.KITCHEN) || '[]');
+                        const kitchenIndex = kitchenOrders.findIndex(o => o.orderId === orderId);
+                        if (kitchenIndex !== -1) {
+                            kitchenOrders[kitchenIndex].status = newStatus;
+                            if (newStatus === 'completed') {
+                                kitchenOrders[kitchenIndex].completedAt = new Date().toISOString();
+                            }
+                            if (newStatus === 'preparing') {
+                                kitchenOrders[kitchenIndex].preparedAt = new Date().toISOString();
+                            }
+                            localStorage.setItem(STORAGE_KEYS.KITCHEN, JSON.stringify(kitchenOrders));
+                        }
+                        
+                        return { success: true };
+                    } catch (e) {
+                        return { success: false };
+                    }
+                },
+                
+                // ========== تنظيف الطلبات التجريبية ==========
+                cleanTestOrders: function() {
+                    try {
+                        const masterOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.MASTER) || '[]');
+                        const cleanMaster = masterOrders.filter(o => 
+                            o.source !== 'test' && 
+                            o.customerName !== 'عميل تجريبي' &&
+                            !o.orderId?.includes('ORD-241215')
+                        );
+                        localStorage.setItem(STORAGE_KEYS.MASTER, JSON.stringify(cleanMaster));
+                        
+                        const kitchenOrders = JSON.parse(localStorage.getItem(STORAGE_KEYS.KITCHEN) || '[]');
+                        const cleanKitchen = kitchenOrders.filter(o => 
+                            o.source !== 'test' && 
+                            o.customerName !== 'عميل تجريبي' &&
+                            !o.orderId?.includes('ORD-241215')
+                        );
+                        localStorage.setItem(STORAGE_KEYS.KITCHEN, JSON.stringify(cleanKitchen));
+                        
+                        console.log('🧹 تم تنظيف الطلبات التجريبية');
+                    } catch (e) {}
+                }
+            };
+            
+            // ==================== نظام السلة ====================
+            const CartSystem = {
+                // ========== إضافة إلى السلة ==========
+                addItem: function(name, price, quantity) {
+                    const existingItem = SystemState.shoppingCart.find(item => item.name === name);
+                    if (existingItem) {
+                        existingItem.quantity += quantity;
+                    } else {
+                        SystemState.shoppingCart.push({ name, price, quantity });
+                    }
+                    this.updateUI();
+                    NotificationSystem.show(`✅ تم إضافة ${quantity} × ${name}`, 'success');
+                },
+                
+                // ========== تحديث كمية عنصر ==========
+                updateQuantity: function(index, change) {
+                    if (SystemState.shoppingCart[index]) {
+                        SystemState.shoppingCart[index].quantity += change;
+                        if (SystemState.shoppingCart[index].quantity <= 0) {
+                            SystemState.shoppingCart.splice(index, 1);
+                        }
+                        this.updateUI();
+                    }
+                },
+                
+                // ========== تحديث واجهة السلة ==========
+                updateUI: function() {
+                    const cartBadge = document.getElementById('cartBadge');
+                    const cartItems = document.getElementById('cartItems');
+                    const cartTotal = document.getElementById('cartTotal');
+                    const totalAmount = document.getElementById('totalAmount');
+                    const checkoutButton = document.getElementById('checkoutButton');
+                    
+                    if (!cartBadge) return;
+                    
+                    const totalItems = SystemState.shoppingCart.reduce((sum, item) => sum + item.quantity, 0);
+                    cartBadge.textContent = totalItems;
+                    
+                    if (SystemState.shoppingCart.length === 0) {
+                        if (cartItems) cartItems.innerHTML = '<div class="empty-cart">السلة فارغة</div>';
+                        if (cartTotal) cartTotal.style.display = 'none';
+                        if (checkoutButton) checkoutButton.style.display = 'none';
+                    } else {
+                        let html = '';
+                        let totalPrice = 0;
+                        
+                        SystemState.shoppingCart.forEach((item, index) => {
+                            const itemTotal = item.price * item.quantity;
+                            totalPrice += itemTotal;
+                            html += `
+                                <div class="cart-item">
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">${item.name}</div>
+                                        <div class="cart-item-price">${item.price} د.أ</div>
+                                    </div>
+                                    <div class="cart-item-quantity">
+                                        <button class="cart-quantity-btn" onclick="window.updateCartItemQuantity(${index}, -1)">-</button>
+                                        <span>${item.quantity}</span>
+                                        <button class="cart-quantity-btn" onclick="window.updateCartItemQuantity(${index}, 1)">+</button>
+                                    </div>
+                                    <div class="cart-item-total">${itemTotal.toFixed(2)} د.أ</div>
+                                </div>
+                            `;
+                        });
+                        
+                        if (cartItems) cartItems.innerHTML = html;
+                        if (totalAmount) totalAmount.textContent = totalPrice.toFixed(2);
+                        if (cartTotal) cartTotal.style.display = 'block';
+                        if (checkoutButton) checkoutButton.style.display = 'block';
+                    }
+                },
+                
+                // ========== تفريغ السلة ==========
+                clear: function() {
+                    SystemState.shoppingCart = [];
+                    this.updateUI();
+                },
+                
+                // ========== الحصول على إجمالي السعر ==========
+                getTotal: function() {
+                    return SystemState.shoppingCart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                },
+                
+                // ========== الحصول على عدد العناصر ==========
+                getCount: function() {
+                    return SystemState.shoppingCart.reduce((sum, item) => sum + item.quantity, 0);
+                }
+            };
+            
+            // ==================== نظام الإشعارات ====================
+            const NotificationSystem = {
+                show: function(message, type = 'info', duration = 4000) {
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        background: ${type === 'success' ? '#28a745' : type === 'error' ? '#dc3545' : '#17a2b8'};
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 35px;
+                        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                        z-index: 9999;
+                        font-weight: bold;
+                        border: 2px solid white;
+                        direction: rtl;
+                        font-family: 'Cairo', sans-serif;
+                    `;
+                    notification.textContent = message;
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), duration);
+                }
+            };
+            
+            // ==================== تهيئة الصفحة ====================
+            document.addEventListener('DOMContentLoaded', function() {
+                // تنظيف الطلبات التجريبية
+                OrderSystem.cleanTestOrders();
+                
+                // ========== عناصر DOM ==========
+                const introScreen = document.getElementById('intro-screen');
+                const mainContent = document.getElementById('main-content');
+                const navTabButtons = document.querySelectorAll('.nav-tab-button');
+                const menuSections = document.querySelectorAll('.menu-section');
+                const cartFab = document.getElementById('cartFab');
+                const cartModal = document.getElementById('cartModal');
+                const closeCartButton = document.getElementById('closeCartButton');
+                const checkoutButton = document.getElementById('checkoutButton');
+                const invoiceModal = document.getElementById('invoiceModal');
+                const closeInvoiceButton = document.getElementById('closeInvoiceButton');
+                const cancelOrderButton = document.getElementById('cancelOrderButton');
+                const invoiceForm = document.getElementById('invoiceForm');
+                
+                // ========== تهيئة أزرار الكمية ==========
+                document.querySelectorAll('.product-card').forEach(card => {
+                    const minusBtn = card.querySelector('.minus-btn');
+                    const plusBtn = card.querySelector('.plus-btn');
+                    const quantityDisplay = card.querySelector('.quantity-display');
+                    let quantity = 1;
+                    
+                    if (minusBtn) {
+                        minusBtn.addEventListener('click', () => {
+                            if (quantity > 1) {
+                                quantity--;
+                                quantityDisplay.textContent = quantity;
+                            }
+                        });
+                    }
+                    
+                    if (plusBtn) {
+                        plusBtn.addEventListener('click', () => {
+                            quantity++;
+                            quantityDisplay.textContent = quantity;
+                        });
+                    }
+                });
+                
+                // ========== أزرار إضافة إلى السلة ==========
+                document.querySelectorAll('.add-to-cart-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productCard = this.closest('.product-card');
+                        const productName = this.dataset.product;
+                        const productPrice = parseFloat(this.dataset.price);
+                        const quantity = parseInt(productCard.querySelector('.quantity-display').textContent);
+                        
+                        CartSystem.addItem(productName, productPrice, quantity);
+                        productCard.querySelector('.quantity-display').textContent = '1';
+                    });
+                });
+                
+                // ========== تبديل الأقسام ==========
+                function switchSection(targetId) {
+                    navTabButtons.forEach(btn => btn.classList.remove('active'));
+                    menuSections.forEach(section => section.classList.remove('active'));
+                    
+                    const activeButton = document.querySelector(`.nav-tab-button[data-target="${targetId}"]`);
+                    const activeSection = document.getElementById(targetId);
+                    
+                    if (activeButton) activeButton.classList.add('active');
+                    if (activeSection) activeSection.classList.add('active');
+                }
+                
+                navTabButtons.forEach(button => {
+                    button.addEventListener('click', () => switchSection(button.dataset.target));
+                });
+                
+                switchSection('sandwiches-section');
+                
+                // ========== تحديث كمية عنصر في السلة (global) ==========
+                window.updateCartItemQuantity = function(index, change) {
+                    CartSystem.updateQuantity(index, change);
+                };
+                
+                // ========== إظهار نافذة الفاتورة ==========
+                window.showInvoiceModal = function() {
+                    if (SystemState.shoppingCart.length === 0) {
+                        NotificationSystem.show('❌ السلة فارغة', 'error');
+                        return;
+                    }
+                    
+                    let summaryHTML = '';
+                    let totalPrice = 0;
+                    
+                    SystemState.shoppingCart.forEach(item => {
+                        const itemTotal = item.price * item.quantity;
+                        totalPrice += itemTotal;
+                        summaryHTML += `
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                <span>${item.name} × ${item.quantity}</span>
+                                <span>${itemTotal.toFixed(2)} د.أ</span>
+                            </div>
+                        `;
+                    });
+                    
+                    summaryHTML += `
+                        <hr style="margin: 10px 0; border: 1px solid #ddd;">
+                        <div style="display: flex; justify-content: space-between; font-weight: bold;">
+                            <span>المجموع:</span>
+                            <span>${totalPrice.toFixed(2)} د.أ</span>
+                        </div>
+                    `;
+                    
+                    const orderSummary = document.getElementById('orderSummary');
+                    if (orderSummary) orderSummary.innerHTML = summaryHTML;
+                    
+                    if (invoiceModal) invoiceModal.classList.add('active');
+                };
+                
+                // ========== إرسال الطلب ==========
+                if (invoiceForm) {
+                    invoiceForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // التحقق من البيانات
+                        const name = document.getElementById('customerName')?.value.trim();
+                        const phone = document.getElementById('customerPhone')?.value.trim();
+                        const branch = document.getElementById('branch')?.value;
+                        
+                        if (!name) {
+                            NotificationSystem.show('❌ الرجاء إدخال الاسم', 'error');
+                            return;
+                        }
+                        
+                        if (!phone || !/^[0-9]{10}$/.test(phone)) {
+                            NotificationSystem.show('❌ الرجاء إدخال رقم هاتف صحيح', 'error');
+                            return;
+                        }
+                        
+                        if (!branch) {
+                            NotificationSystem.show('❌ الرجاء اختيار الفرع', 'error');
+                            return;
+                        }
+                        
+                        // تجهيز بيانات الطلب
+                        const orderData = {
+                            orderId: OrderSystem.generateOrderId(),
+                            timestamp: new Date().toISOString(),
+                            customerName: name,
+                            customerPhone: '+962' + phone,
+                            branch: branch,
+                            notes: document.getElementById('notes')?.value.trim() || '',
+                            total: CartSystem.getTotal().toFixed(2),
+                            itemsCount: CartSystem.getCount(),
+                            items: SystemState.shoppingCart.map(item => ({
+                                name: item.name,
+                                price: item.price,
+                                quantity: item.quantity
+                            })),
+                            source: 'web',
+                            status: 'pending'
+                        };
+                        
+                        // تعطيل زر الإرسال
+                        const submitBtn = e.target.querySelector('.submit-order-button');
+                        if (submitBtn) {
+                            submitBtn.disabled = true;
+                            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+                        }
+                        
+                        // حفظ الطلب في النظام الموحد
+                        const result = OrderSystem.saveOrder(orderData);
+                        
+                        if (result.success) {
+                            // تفريغ السلة
+                            CartSystem.clear();
+                            
+                            // إغلاق النوافذ
+                            if (invoiceModal) invoiceModal.classList.remove('active');
+                            if (cartModal) cartModal.classList.remove('active');
+                            
+                            // إظهار رسالة النجاح
+                            NotificationSystem.show(`✅ تم تأكيد الطلب بنجاح! رقم الطلب: ${orderData.orderId}`, 'success');
+                            
+                            // إعادة تعيين النموذج
+                            invoiceForm.reset();
+                        } else {
+                            NotificationSystem.show('❌ حدث خطأ في إرسال الطلب', 'error');
+                        }
+                        
+                        // إعادة تمكين زر الإرسال
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = 'تأكيد الطلب';
+                        }
+                    });
+                }
+                
+                // ========== أحداث النوافذ ==========
+                if (cartFab && cartModal) {
+                    cartFab.addEventListener('click', () => cartModal.classList.add('active'));
+                }
+                
+                if (closeCartButton && cartModal) {
+                    closeCartButton.addEventListener('click', () => cartModal.classList.remove('active'));
+                }
+                
+                if (closeInvoiceButton && invoiceModal) {
+                    closeInvoiceButton.addEventListener('click', () => invoiceModal.classList.remove('active'));
+                }
+                
+                if (cancelOrderButton && invoiceModal) {
+                    cancelOrderButton.addEventListener('click', () => invoiceModal.classList.remove('active'));
+                }
+                
+                if (checkoutButton) {
+                    checkoutButton.addEventListener('click', () => {
+                        if (cartModal) cartModal.classList.remove('active');
+                        window.showInvoiceModal();
+                    });
+                }
+                
+                if (cartModal) {
+                    cartModal.addEventListener('click', (e) => {
+                        if (e.target === cartModal) cartModal.classList.remove('active');
+                    });
+                }
+                
+                if (invoiceModal) {
+                    invoiceModal.addEventListener('click', (e) => {
+                        if (e.target === invoiceModal) invoiceModal.classList.remove('active');
+                    });
+                }
+                
+                // ========== الشاشة التمهيدية ==========
+                setTimeout(() => {
+                    if (introScreen) introScreen.classList.add('hidden');
+                    if (mainContent) {
+                        mainContent.classList.remove('hidden');
+                        mainContent.classList.add('visible');
+                    }
+                }, 3000);
+                
+                SystemState.initialized = true;
+                console.log('🚀 نظام غماس بلدي جاهز - الحل الجذري النهائي');
+            });
+        })();
+    </script>
+</body>
+</html>
