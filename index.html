@@ -127,7 +127,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, var(--secondary-red), var(--primary-red));
+            background: linear-gradient(135deg, #a00000, #d00000);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -141,6 +141,41 @@
         #intro-screen.hidden {
             opacity: 0;
             pointer-events: none;
+        }
+
+        .intro-burst-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .intro-burst-particle {
+            position: absolute;
+            font-size: 0;
+            opacity: 0;
+            animation: burstOut 1.2s ease-out forwards;
+            filter: drop-shadow(0 0 10px var(--luminous-white));
+            z-index: 5;
+            transform-origin: center;
+        }
+
+        @keyframes burstOut {
+            0% { 
+                transform: scale(0) translate(0, 0); 
+                opacity: 0; 
+            }
+            15% { 
+                opacity: 0.9; 
+            }
+            100% { 
+                transform: scale(1.8) translate(var(--x-offset), var(--y-offset)); 
+                opacity: 0; 
+            }
         }
 
         .intro-logo {
@@ -157,29 +192,29 @@
             border: 5px solid var(--luminous-white);
             transform: scale(0);
             opacity: 0;
-            animation: logoPopIn 1s ease-out forwards;
-            animation-delay: .2s;
+            animation: logoPopIn 0.8s ease-out forwards;
+            animation-delay: 0.3s;
             position: relative;
-            z-index: 10;
+            z-index: 20;
         }
 
         .intro-logo::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--secondary-red) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%);
             z-index: -1;
-            opacity: 0.7;
-            animation: glowPulse 2s infinite alternate;
+            opacity: 0.3;
+            animation: glowPulse 1.5s infinite alternate;
         }
 
         @keyframes glowPulse {
-            0% { opacity: 0.5; transform: scale(0.95); }
-            100% { opacity: 0.8; transform: scale(1.05); }
+            0% { opacity: 0.2; transform: scale(0.95); }
+            100% { opacity: 0.4; transform: scale(1.05); }
         }
 
         .intro-logo img {
@@ -187,7 +222,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 50%;
-            animation: logoSingleSpin 1.5s ease-in-out forwards;
+            animation: logoSingleSpin 1s ease-in-out forwards;
         }
 
         @keyframes logoPopIn {
@@ -207,11 +242,11 @@
             color: var(--luminous-white);
             text-shadow: 0 0 25px var(--primary-red), 0 0 50px var(--secondary-red);
             opacity: 0;
-            transform: translateY(50px);
-            animation: textFadeIn 1.5s ease-out forwards;
-            animation-delay: .8s;
+            transform: translateY(30px);
+            animation: textFadeIn 1s ease-out forwards;
+            animation-delay: 0.8s;
             position: relative;
-            z-index: 10;
+            z-index: 20;
         }
 
         @keyframes textFadeIn {
@@ -222,11 +257,13 @@
             font-family: 'Cairo', sans-serif;
             font-size: 1.1em;
             color: var(--luminous-white);
-            margin-top: 20px;
+            margin-top: 15px;
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
-            animation-delay: 2s;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 1.8s;
             text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            position: relative;
+            z-index: 20;
         }
 
         @keyframes fadeIn {
@@ -238,9 +275,9 @@
             opacity: 0;
         }
 
-        .loading-text span:nth-child(1) { animation-delay: 2.5s; }
-        .loading-text span:nth-child(2) { animation-delay: 2.6s; }
-        .loading-text span:nth-child(3) { animation-delay: 2.7s; }
+        .loading-text span:nth-child(1) { animation-delay: 2.2s; }
+        .loading-text span:nth-child(2) { animation-delay: 2.3s; }
+        .loading-text span:nth-child(3) { animation-delay: 2.4s; }
 
         @keyframes blink {
             0%, 100% { opacity: 0; }
@@ -250,54 +287,32 @@
         .loading-bar-container {
             width: 85%;
             max-width: 400px;
-            height: 7px;
-            background-color: var(--luminous-white);
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.3);
             border-radius: 5px;
-            margin-top: 30px;
+            margin-top: 25px;
             overflow: hidden;
             box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.4);
             opacity: 0;
-            animation: fadeIn 1s ease-out forwards;
-            animation-delay: 2.2s;
+            animation: fadeIn 0.8s ease-out forwards;
+            animation-delay: 1.9s;
+            position: relative;
+            z-index: 20;
         }
 
         .loading-bar {
             width: 0;
             height: 100%;
-            background: linear-gradient(to right, #FF0000, #A00000);
+            background: linear-gradient(to right, #FFFFFF, #F0F0F0);
             border-radius: 50px;
-            animation: fillBar 3.5s ease-out forwards;
-            animation-delay: .5s;
-            box-shadow: 0 0 10px #f00;
+            animation: fillBar 2.5s ease-out forwards;
+            animation-delay: 0.5s;
+            box-shadow: 0 0 10px #FFFFFF;
         }
 
         @keyframes fillBar {
             0% { width: 0; }
             100% { width: 100%; }
-        }
-
-        .intro-burst-container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .intro-burst-particle {
-            position: absolute;
-            font-size: 0;
-            opacity: 0;
-            animation: burstOut 1.5s ease-out forwards;
-            filter: drop-shadow(0 0 10px var(--luminous-white));
-        }
-
-        @keyframes burstOut {
-            0% { transform: scale(0) translate(0, 0); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: scale(1.8) translate(var(--x-offset), var(--y-offset)); opacity: 0; }
         }
 
         #main-content {
@@ -1204,13 +1219,6 @@
             border-top: 4px solid var(--secondary-red);
         }
 
-        .social-links {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-        }
-
         .footer .instagram-button {
             display: inline-flex;
             align-items: center;
@@ -1343,7 +1351,43 @@
 </head>
 <body>
     <div id="intro-screen">
-        <div class="intro-burst-container"></div>
+        <div class="intro-burst-container">
+            <span class="intro-burst-particle" style="font-size: 51.1315px; --x-offset: -85.761255244756px; --y-offset: -192.12466067618752px; animation-delay: 0.201011s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 55.2967px; --x-offset: -156.12889726395144px; --y-offset: -114.2090596350247px; animation-delay: 0.184759s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 48.6987px; --x-offset: 182.6986917776933px; --y-offset: 189.25423495053928px; animation-delay: 0.393445s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 36.3854px; --x-offset: -181.6106440798448px; --y-offset: -38.698473979104435px; animation-delay: 0.478654s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 35.2781px; --x-offset: 142.97925256212451px; --y-offset: -18.8468402672199px; animation-delay: 0.0648694s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 50.7466px; --x-offset: -260.3518251778476px; --y-offset: -14.245493257421154px; animation-delay: 0.341428s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 56.6987px; --x-offset: -48.365578670485725px; --y-offset: 127.38653007755276px; animation-delay: 0.393248s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 45.0349px; --x-offset: 124.7300382221918px; --y-offset: -38.97120962702396px; animation-delay: 0.347574s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 35.6034px; --x-offset: 30.73460932750756px; --y-offset: -134.98027417103108px; animation-delay: 0.0688391s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 58.1689px; --x-offset: 118.22198744924079px; --y-offset: -210.419166438881px; animation-delay: 0.154584s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 39.4936px; --x-offset: -106.89979631249264px; --y-offset: -205.48536220348836px; animation-delay: 0.18371s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 29.25px; --x-offset: -144.15009562720635px; --y-offset: -55.34174131818245px; animation-delay: 0.402605s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 59.5128px; --x-offset: -174.31131815180595px; --y-offset: 56.283669324137065px; animation-delay: 0.180243s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 44.6392px; --x-offset: -86.39998143735308px; --y-offset: 225.07418734034624px; animation-delay: 0.00332067s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 37.7267px; --x-offset: -196.5843861811921px; --y-offset: -51.61705601733072px; animation-delay: 0.271863s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 40.1152px; --x-offset: 140.16064429625544px; --y-offset: -107.65003855229908px; animation-delay: 0.122264s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 57.8264px; --x-offset: -74.65451223812633px; --y-offset: 74.17188107093875px; animation-delay: 0.111658s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 41.2561px; --x-offset: -56.12531732923183px; --y-offset: 197.18391270658387px; animation-delay: 0.268927s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 26.8848px; --x-offset: -114.56430774972948px; --y-offset: -48.47404648721402px; animation-delay: 0.348663s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 41.0657px; --x-offset: 108.90696010970575px; --y-offset: -127.4895790273894px; animation-delay: 0.430689s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 59.8941px; --x-offset: 153.84728492699742px; --y-offset: -225.46529766938454px; animation-delay: 0.46357s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 57.3645px; --x-offset: -75.9039213564505px; --y-offset: 144.36199746877685px; animation-delay: 0.329258s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 46.3758px; --x-offset: 10.809109990791189px; --y-offset: 222.65419274594623px; animation-delay: 0.327681s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 38.9547px; --x-offset: 155.1252491547749px; --y-offset: -58.5434294896657px; animation-delay: 0.150737s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 32.697px; --x-offset: -219.926428116461px; --y-offset: 122.37863850374528px; animation-delay: 0.0201211s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 25.5915px; --x-offset: 175.95774247313497px; --y-offset: -36.00795806986299px; animation-delay: 0.0840622s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 55.0225px; --x-offset: -50.25544262100267px; --y-offset: -183.5467545498487px; animation-delay: 0.11401s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 25.4123px; --x-offset: 203.81893031414302px; --y-offset: 88.91260949964243px; animation-delay: 0.332766s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 46.0863px; --x-offset: 144.49533695764651px; --y-offset: -237.5640259897775px; animation-delay: 0.187s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 47.5085px; --x-offset: 192.47830566647147px; --y-offset: -174.83471823724267px; animation-delay: 0.260142s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 27.4574px; --x-offset: 232.6794830314939px; --y-offset: 15.864688273569412px; animation-delay: 0.17459s;">🍖</span>
+            <span class="intro-burst-particle" style="font-size: 31.0946px; --x-offset: -7.75363092593432px; --y-offset: -201.52537140311904px; animation-delay: 0.376605s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 45.6716px; --x-offset: 66.72387536167348px; --y-offset: -203.75430840500374px; animation-delay: 0.177671s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 51.8438px; --x-offset: 264.8034208841394px; --y-offset: -66.06967155256223px; animation-delay: 0.0768901s;">🥩</span>
+            <span class="intro-burst-particle" style="font-size: 42.2501px; --x-offset: -120.61071763240957px; --y-offset: -57.908481208086414px; animation-delay: 0.135327s;">🥩</span>
+        </div>
         <div class="intro-logo">
             <img src="https://iili.io/fyEXKps.jpg" alt="شعار غماس بلدي">
         </div>
@@ -2198,14 +2242,9 @@
         </main>
         
         <footer class="footer">
-            <div class="social-links">
-                <a href="https://www.instagram.com/laithdeveloper/" target="_blank" class="instagram-button">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.instagram.com/abood_m_anaswh?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="instagram-button">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
+            <a href="https://www.instagram.com/laithdeveloper/" target="_blank" class="instagram-button">
+                <i class="fab fa-instagram"></i>
+            </a>
             <p>© 2026 حقوق الطبع والنشر ل Laith AL-Arabiat</p>
         </footer>
     </div>
